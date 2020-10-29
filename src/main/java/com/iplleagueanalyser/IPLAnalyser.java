@@ -97,4 +97,16 @@ public class IPLAnalyser {
 						  .limit(noOfTopPlayers)
 						  .collect(Collectors.toList());
 	}
+	
+	public List<IPLBatsman> getBatsmenWithBesStrikeRatesAndMaximumBoundaries(int noOfTopPlayers) throws IPLAnalyserException{
+		if(batsmanList.size() == 0) {
+			throw new IPLAnalyserException("No Data Available", IPLAnalyserException.ExceptionType.NO_DATA_FOUND);
+		}
+		Comparator<IPLBatsman> comparator = Comparator.comparing(IPLBatsman::performanceFactor)
+													  .reversed();
+		return batsmanList.stream()
+						  .sorted(comparator)
+						  .limit(noOfTopPlayers)
+						  .collect(Collectors.toList());
+	}
 }

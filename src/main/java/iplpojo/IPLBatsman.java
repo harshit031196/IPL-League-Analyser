@@ -167,4 +167,8 @@ public class IPLBatsman {
 			return false;
 		return true;
 	}
+	
+	public double performanceFactor() {
+		return sixes * 0.5 + fours * 0.3 + strikeRate * 0.2;
+	}
 }
