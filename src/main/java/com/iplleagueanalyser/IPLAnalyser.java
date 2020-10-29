@@ -61,4 +61,16 @@ public class IPLAnalyser {
 						.collect(Collectors.toList());
 		return topBatsmanAverageList;
 	}
+	
+	public List<Double> getTopStrikeRates(int noOfTopStrikes) throws IPLAnalyserException{
+		if(batsmanList.size() == 0) {
+			throw new IPLAnalyserException("No Data Available", IPLAnalyserException.ExceptionType.NO_DATA_FOUND);
+		}
+		List<Double> topBatsmanStrikeRateList = batsmanList.stream()
+						.map(player -> player.getStrikeRate())
+						.sorted(Comparator.reverseOrder())
+						.limit(noOfTopStrikes)
+						.collect(Collectors.toList());
+		return topBatsmanStrikeRateList;
+	}
 }

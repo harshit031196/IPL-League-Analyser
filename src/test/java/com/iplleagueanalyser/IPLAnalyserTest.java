@@ -49,7 +49,14 @@ public class IPLAnalyserTest {
 		try {
 			List<Double> list = iplAnalyser.getTopBattingAverages(3);
 			assertEquals(83.2, list.get(0), 0.0);
-		} catch (IPLAnalyserException e) {
-		}
+		} catch (IPLAnalyserException e) {}
+	}
+	
+	@Test
+	public void givenAFileWhenLoadedToGetTopStrikeRatesOfTheBatsman_ShouldReturnCorrectResult() {
+		try {
+			List<Double> list = iplAnalyser.getTopStrikeRates(3);
+			assertEquals(333.33, list.get(0), 0.0);
+		} catch (IPLAnalyserException e) {}
 	}
 }
