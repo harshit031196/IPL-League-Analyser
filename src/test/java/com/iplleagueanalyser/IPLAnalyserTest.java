@@ -84,7 +84,7 @@ public void givenCSVBatsmenFileWhenLoadedToGetTopBatsmenWithMaximumFours_ShouldR
 public void givenCSVBatsmenFileWhenLoadedToGetTopBatsmenWithBestStrikeRateAndMaximumFoursAndSixes_ShouldReturnCorrectResult() {
 	try {
 		List<IPLBatsman> topStrikeRateWithMaximumBoundaries = iplAnalyser
-				.getBatsmenWithBesStrikeRatesAndMaximumBoundaries(3);
+				.getBatsmenWithBestStrikeRatesAndMaximumBoundaries(3);
 		assertEquals("Andre Russell", topStrikeRateWithMaximumBoundaries.get(0).getPlayerName());
 	} catch (IPLAnalyserException e) {}
 }
@@ -126,10 +126,18 @@ public void givenCSVBowlerFileWhenLoadedToGetTopBowlerStrikeRates_ShouldReturnCo
 }
 
 @Test
-public void givenAFileWhenLoadedToGetBowlersWithBestEconomyRates_ShouldReturnCorrectResult() {
+public void givenCSVBowlerFileWhenLoadedToGetBowlersWithBestEconomyRates_ShouldReturnCorrectResult() {
 	try {
 		List<IPLBowler> bestEconomyRatesBowlers = iplAnalyser.getBowlersWithBestEconomyRate(3);
 		assertEquals("Shivam Dube", bestEconomyRatesBowlers.get(0).getPlayerName());
+	} catch(IPLAnalyserException e) {}
+}
+
+@Test
+public void givenCSVBowlerFileWhenLoadedToGetBowlersWithBestStrikeRatesWith5wAnd4ws_ShouldRetunrCorrectResult() {
+	try {
+		List<IPLBowler> bestStrikeRatesAndBest5wsAnd4wsBowlers = iplAnalyser.getBowlerWithBestStrikeRateWith5wAnd4w(3);
+		assertEquals("Kagiso Rabada", bestStrikeRatesAndBest5wsAnd4wsBowlers.get(0).getPlayerName());
 	} catch(IPLAnalyserException e) {}
 }
 
