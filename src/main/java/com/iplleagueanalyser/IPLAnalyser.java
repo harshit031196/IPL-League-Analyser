@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import exception.IPLAnalyserException;
@@ -107,6 +108,20 @@ public class IPLAnalyser {
 		return batsmanList.stream()
 						  .sorted(comparator)
 						  .limit(noOfTopPlayers)
+						  .collect(Collectors.toList());
+	}
+	
+	public List<IPLBatsman> getBatsmenWithBestAveragesAndBestStrikeRates(int noOfTopPlayers) throws IPLAnalyserException {
+		if(batsmanList.size() == 0) {
+			throw new IPLAnalyserException("No Data Available", IPLAnalyserException.ExceptionType.NO_DATA_FOUND);
+		}
+		Function<IPLBatsman, Double> toGetAverage = p -> Double.parseDouble(p.getAverage());
+		Comparator<IPLBatsman> comparatorForAverageRuns = Comparator.comparing(toGetAverage)
+																	.reversed();
+		return batsmanList.stream()
+						  .sorted(comparatorForAverageRuns)
+						  .limit(noOfTopPlayers)
+						  .sorted(Comparator.comparing(IPLBatsman::getStrikeRate).reversed())
 						  .collect(Collectors.toList());
 	}
 }
