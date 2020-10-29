@@ -124,4 +124,18 @@ public class IPLAnalyser {
 						  .sorted(Comparator.comparing(IPLBatsman::getStrikeRate).reversed())
 						  .collect(Collectors.toList());
 	}
+	
+	public List<IPLBatsman> getBatsmenWithMaximumRunsWithBestAverages(int noOfTopPlayers) throws IPLAnalyserException {
+		if(batsmanList.size() == 0) {
+			throw new IPLAnalyserException("No Data Available", IPLAnalyserException.ExceptionType.NO_DATA_FOUND);
+		}
+		Function<IPLBatsman, Double> toGetAverage = p -> Double.parseDouble(p.getAverage());
+		Comparator<IPLBatsman> comparator = Comparator.comparing(IPLBatsman::getRuns)
+				  									  .reversed();
+		return batsmanList.stream()
+						  .sorted(comparator)
+						  .limit(noOfTopPlayers)
+						  .sorted(Comparator.comparing(toGetAverage).reversed())
+						  .collect(Collectors.toList());
+	}
 }
