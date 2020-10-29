@@ -2,6 +2,7 @@ package com.iplleagueanalyser;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Before;
@@ -79,7 +80,7 @@ public void givenAFileWhenLoadedToGetTopBatsmenWithMaximumFours_ShouldReturnCorr
 }
 
 @Test
-public void givenAFileWhenLoadedToGetTopBatsmansWithBestStrikeRateAndMaximumFoursAndSixes_ShouldReturnCorrectResult() {
+public void givenAFileWhenLoadedToGetTopBatsmenWithBestStrikeRateAndMaximumFoursAndSixes_ShouldReturnCorrectResult() {
 	try {
 		List<IPLBatsman> topStrikeRateWithMaximumBoundaries = iplAnalyser
 				.getBatsmenWithBesStrikeRatesAndMaximumBoundaries(3);
@@ -88,7 +89,7 @@ public void givenAFileWhenLoadedToGetTopBatsmansWithBestStrikeRateAndMaximumFour
 }
 
 @Test
-public void givenAFileWhenLoadedToGetTopCricketersWhoHadBestAveragesWithBestStrikingRates_ShouldReturnCorrectResult() {
+public void givenAFileWhenLoadedToGetTopBatsmenWhoHadBestAveragesWithBestStrikingRates_ShouldReturnCorrectResult() {
 	try {
 		List<IPLBatsman> bestAveragesWithBestStrikeRateCricketers = iplAnalyser
 				.getBatsmenWithBestAveragesAndBestStrikeRates(3);
@@ -97,11 +98,20 @@ public void givenAFileWhenLoadedToGetTopCricketersWhoHadBestAveragesWithBestStri
 }
 
 @Test
-public void givenAFileWhenLoadedToGetTopCricketersWhoHadMaximumRunsWithBestAverages_ShouldReturnCorrectResult() {
+public void givenAFileWhenLoadedToGetTopBatsmenWhoHadMaximumRunsWithBestAverages_ShouldReturnCorrectResult() {
 	try {
 		List<IPLBatsman> maximumRunsWithBestAveragesCricketers = iplAnalyser
 				.getBatsmenWithMaximumRunsWithBestAverages(3);
 		assertEquals("David Warner", maximumRunsWithBestAveragesCricketers.get(0).getPlayerName());
+	} catch (IPLAnalyserException e) {}
+}
+
+@Test
+public void givenAFileWhenLoadedToGetTopBowlingAverages_ShouldReturnCorrectResult() {
+	try {
+		List<Double> topBowlingAverages = iplAnalyser.getTopBowlingAverages(3);
+		List<Double> expectedTopBowlingAverages = Arrays.asList(new Double[]{11.0, 14.0, 14.5});
+		assertEquals(expectedTopBowlingAverages, topBowlingAverages);
 	} catch (IPLAnalyserException e) {}
 }
 

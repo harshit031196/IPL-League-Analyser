@@ -39,7 +39,7 @@ public class IPLBowler {
 	}
 	public String getAverage() {
 		if(average.equals("-")) {
-			average = "0.0";
+			average = "500.0";
 		}
 		return average;
 	}
@@ -63,7 +63,7 @@ public class IPLBowler {
 	}
 	public String getStrikeRate() {
 		if(strikeRate.equals("-")) {
-			strikeRate = "0.0";
+			strikeRate = "500.0";
 		}
 		return strikeRate;
 	}

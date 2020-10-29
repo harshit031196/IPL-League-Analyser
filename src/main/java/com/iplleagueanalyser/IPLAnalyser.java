@@ -138,4 +138,15 @@ public class IPLAnalyser {
 						  .sorted(Comparator.comparing(toGetAverage).reversed())
 						  .collect(Collectors.toList());
 	}
+	
+	public List<Double> getTopBowlingAverages(int noOfTopAverages) throws IPLAnalyserException{
+		if(bowlerList.size() == 0) {
+			throw new IPLAnalyserException("No Data Available", IPLAnalyserException.ExceptionType.NO_DATA_FOUND);
+		}
+		return bowlerList.stream()
+						 .map(bowler -> Double.parseDouble(bowler.getAverage()))
+						 .sorted()
+						 .limit(noOfTopAverages)
+						 .collect(Collectors.toList());
+	}
 }
