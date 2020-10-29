@@ -73,4 +73,28 @@ public class IPLAnalyser {
 						.collect(Collectors.toList());
 		return topBatsmanStrikeRateList;
 	}
+	
+	public List<IPLBatsman> getBatsmenWithMaximumSixes(int noOfTopPlayers) throws IPLAnalyserException{
+		if(batsmanList.size() == 0) {
+			throw new IPLAnalyserException("No Data Available", IPLAnalyserException.ExceptionType.NO_DATA_FOUND);
+		}
+		Comparator<IPLBatsman> comparator = Comparator.comparing(IPLBatsman::getSixes)
+													  .reversed();
+		return batsmanList.stream()
+						  .sorted(comparator)
+						  .limit(noOfTopPlayers)
+						  .collect(Collectors.toList());
+	}
+	
+	public List<IPLBatsman> getBatsmenWithMaximumFours(int noOfTopPlayers) throws IPLAnalyserException{
+		if(batsmanList.size() == 0) {
+			throw new IPLAnalyserException("No Data Available", IPLAnalyserException.ExceptionType.NO_DATA_FOUND);
+		}
+		Comparator<IPLBatsman> comparator = Comparator.comparing(IPLBatsman::getFours)
+													  .reversed();
+		return batsmanList.stream()
+						  .sorted(comparator)
+						  .limit(noOfTopPlayers)
+						  .collect(Collectors.toList());
+	}
 }
