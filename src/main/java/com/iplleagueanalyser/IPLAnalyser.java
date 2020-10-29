@@ -160,4 +160,14 @@ public class IPLAnalyser {
 				 		 .limit(noOfTopStrikeRates)
 				 		 .collect(Collectors.toList());
 	}
+	
+	public List<IPLBowler> getBowlersWithBestEconomyRate(int noOfTopBowlers) throws IPLAnalyserException{
+		if(bowlerList.size() == 0) {
+			throw new IPLAnalyserException("No Data Available", IPLAnalyserException.ExceptionType.NO_DATA_FOUND);
+		}
+		return bowlerList.stream()
+						 .sorted(Comparator.comparing(IPLBowler::getEconomy))
+						 .limit(noOfTopBowlers)
+						 .collect(Collectors.toList());
+	}
 }
