@@ -149,4 +149,15 @@ public class IPLAnalyser {
 						 .limit(noOfTopAverages)
 						 .collect(Collectors.toList());
 	}
+	
+	public List<Double> getTopBowlingStrikeRates(int noOfTopStrikeRates) throws IPLAnalyserException{
+		if(bowlerList.size() == 0) {
+			throw new IPLAnalyserException("No Data Available", IPLAnalyserException.ExceptionType.NO_DATA_FOUND);
+		}
+		return bowlerList.stream()
+				 		 .map(bowler -> Double.parseDouble(bowler.getStrikeRate()))
+				 		 .sorted()
+				 		 .limit(noOfTopStrikeRates)
+				 		 .collect(Collectors.toList());
+	}
 }

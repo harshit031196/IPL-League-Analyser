@@ -30,7 +30,7 @@ public void setup() {
 }
 
 @Test
-public void givenAFileWithBatsmanData_WhenLoaded_ShouldReturnTheEntries() {
+public void givenCSVBatsmenFileWithBatsmanData_WhenLoaded_ShouldReturnTheEntries() {
 	iplAnalyser = new IPLAnalyser();
 	try {
 		int entries = iplAnalyser.loadBatsmanData(IPL_BATSMAN_FILE_PATH);
@@ -39,7 +39,7 @@ public void givenAFileWithBatsmanData_WhenLoaded_ShouldReturnTheEntries() {
 }
 
 @Test
-public void givenAFileWithBowlerData_WhenLoaded_ShouldReturnTheEntries() {
+public void givenCSVBowlerFileWithBowlerData_WhenLoaded_ShouldReturnTheEntries() {
 	iplAnalyser = new IPLAnalyser();
 	try {
 		int entries = iplAnalyser.loadBowlerData(IPL_BOWLER_FILE_PATH);
@@ -48,7 +48,7 @@ public void givenAFileWithBowlerData_WhenLoaded_ShouldReturnTheEntries() {
 }
 
 @Test
-public void givenAFileWhenLoadedToGetTopBattingAverages_ShouldReturnCorrectResult() {
+public void givenCSVBatsmenFileWhenLoadedToGetTopBattingAverages_ShouldReturnCorrectResult() {
 	try {
 		List<Double> list = iplAnalyser.getTopBattingAverages(3);
 		assertEquals(83.2, list.get(0), 0.0);
@@ -56,7 +56,7 @@ public void givenAFileWhenLoadedToGetTopBattingAverages_ShouldReturnCorrectResul
 }
 
 @Test
-public void givenAFileWhenLoadedToGetTopStrikeRatesOfTheBatsman_ShouldReturnCorrectResult() {
+public void givenCSVBatsmenFileWhenLoadedToGetTopStrikeRatesOfTheBatsman_ShouldReturnCorrectResult() {
 	try {
 		List<Double> list = iplAnalyser.getTopStrikeRates(3);
 		assertEquals(333.33, list.get(0), 0.0);
@@ -64,7 +64,7 @@ public void givenAFileWhenLoadedToGetTopStrikeRatesOfTheBatsman_ShouldReturnCorr
 }
 
 @Test
-public void givenAFileWhenLoadedToGetTopBatsmenWithMaximumSixes_ShouldReturnCorrectResult() {
+public void givenCSVBatsmenFileWhenLoadedToGetTopBatsmenWithMaximumSixes_ShouldReturnCorrectResult() {
 	try {
 		List<IPLBatsman> topSixHitters = iplAnalyser.getBatsmenWithMaximumSixes(3);
 		assertEquals("Andre Russell", topSixHitters.get(0).getPlayerName());
@@ -72,7 +72,7 @@ public void givenAFileWhenLoadedToGetTopBatsmenWithMaximumSixes_ShouldReturnCorr
 }
 
 @Test
-public void givenAFileWhenLoadedToGetTopBatsmenWithMaximumFours_ShouldReturnCorrectResult() {
+public void givenCSVBatsmenFileWhenLoadedToGetTopBatsmenWithMaximumFours_ShouldReturnCorrectResult() {
 	try {
 		List<IPLBatsman> topFourHitters = iplAnalyser.getBatsmenWithMaximumFours(3);
 		assertEquals("Shikhar Dhawan", topFourHitters.get(0).getPlayerName());
@@ -80,7 +80,7 @@ public void givenAFileWhenLoadedToGetTopBatsmenWithMaximumFours_ShouldReturnCorr
 }
 
 @Test
-public void givenAFileWhenLoadedToGetTopBatsmenWithBestStrikeRateAndMaximumFoursAndSixes_ShouldReturnCorrectResult() {
+public void givenCSVBatsmenFileWhenLoadedToGetTopBatsmenWithBestStrikeRateAndMaximumFoursAndSixes_ShouldReturnCorrectResult() {
 	try {
 		List<IPLBatsman> topStrikeRateWithMaximumBoundaries = iplAnalyser
 				.getBatsmenWithBesStrikeRatesAndMaximumBoundaries(3);
@@ -89,7 +89,7 @@ public void givenAFileWhenLoadedToGetTopBatsmenWithBestStrikeRateAndMaximumFours
 }
 
 @Test
-public void givenAFileWhenLoadedToGetTopBatsmenWhoHadBestAveragesWithBestStrikingRates_ShouldReturnCorrectResult() {
+public void givenCSVBatsmenFileWhenLoadedToGetTopBatsmenWhoHadBestAveragesWithBestStrikingRates_ShouldReturnCorrectResult() {
 	try {
 		List<IPLBatsman> bestAveragesWithBestStrikeRateCricketers = iplAnalyser
 				.getBatsmenWithBestAveragesAndBestStrikeRates(3);
@@ -98,7 +98,7 @@ public void givenAFileWhenLoadedToGetTopBatsmenWhoHadBestAveragesWithBestStrikin
 }
 
 @Test
-public void givenAFileWhenLoadedToGetTopBatsmenWhoHadMaximumRunsWithBestAverages_ShouldReturnCorrectResult() {
+public void givenCSVBatsmenFileWhenLoadedToGetTopBatsmenWhoHadMaximumRunsWithBestAverages_ShouldReturnCorrectResult() {
 	try {
 		List<IPLBatsman> maximumRunsWithBestAveragesCricketers = iplAnalyser
 				.getBatsmenWithMaximumRunsWithBestAverages(3);
@@ -107,11 +107,20 @@ public void givenAFileWhenLoadedToGetTopBatsmenWhoHadMaximumRunsWithBestAverages
 }
 
 @Test
-public void givenAFileWhenLoadedToGetTopBowlingAverages_ShouldReturnCorrectResult() {
+public void givenCSVBowlerFileWhenLoadedToGetTopBowlingAverages_ShouldReturnCorrectResult() {
 	try {
 		List<Double> topBowlingAverages = iplAnalyser.getTopBowlingAverages(3);
 		List<Double> expectedTopBowlingAverages = Arrays.asList(new Double[]{11.0, 14.0, 14.5});
 		assertEquals(expectedTopBowlingAverages, topBowlingAverages);
+	} catch (IPLAnalyserException e) {}
+}
+
+@Test
+public void givenCSVBowlerFileWhenLoadedToGetTopBowlerStrikeRates_ShouldReturnCorrectResult() {
+	try {
+		List<Double> topBowlerStrikeRates = iplAnalyser.getTopBowlingStrikeRates(3);
+		List<Double> expectedTopBowlingStrikeRates = Arrays.asList(new Double[]{8.66, 10.75, 11.0});
+		assertEquals(expectedTopBowlingStrikeRates, topBowlerStrikeRates);
 	} catch (IPLAnalyserException e) {}
 }
 
